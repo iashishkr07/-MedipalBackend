@@ -13,6 +13,7 @@ import medicalRecordRoutes from "./routes/medicalRecordRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import adminRouter from "./routes/adminRoute.js";
 import doctorsRoute from "./routes/doctorsRoute.js";
+import aiRoutes from "./routes/aiRoute.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -36,6 +37,7 @@ app.use("/api", reportRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api", adminRouter);
 app.use("/api/medical-records", medicalRecordRoutes);
+app.use("/api/ai", aiRoutes);
 
 // Test
 app.get("/", (req, res) => {
