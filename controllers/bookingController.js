@@ -80,6 +80,30 @@ export const getBookingsForLoggedInDoctor = async (req, res) => {
   }
 };
 
+// Get bookings for the logged-in user
+export const getBookingsForCurrentUser = async (req, res) => {
+  try {
+    const userEmail = req.user?.email;
+    if (!userEmail) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized: User data not found",
+      });
+    }
+
+    const bookings = await Booking.find({ email: userEmail }).sort({
+      date: -1,
+    });
+    res.status(200).json({ success: true, bookings });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching user's bookings",
+      error: error.message,
+    });
+  }
+};
+
 // Update a booking
 export const updateBooking = async (req, res) => {
   try {
